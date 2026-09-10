@@ -28,7 +28,7 @@ public class 전력망을_둘로_나누기_곽지영 {
         int cnt = 1;
 
         for (int next : graph[cur]) {
-            if (next == parent) continue;
+            if (next == parent) continue; // 무한 재귀 막기
 
             int subtree = dfs(n, next, cur);
             int diff = Math.abs((n - subtree) - subtree);
