@@ -1,0 +1,32 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int n, int[] lost, int[] reserve) {
+        Arrays.sort(lost);
+        Arrays.sort(reserve);
+
+        Set<Integer> reserveSet = new HashSet<>();
+        for (int r : reserve) reserveSet.add(r);
+
+        List<Integer> realLost = new ArrayList<>();
+        for (int l : lost) {
+            if (reserveSet.contains(l)) {
+                reserveSet.remove(l);
+            } else {
+                realLost.add(l);
+            }
+        }
+
+        int answer = n - realLost.size();
+
+        for (int l : realLost) {
+            if (reserveSet.remove(l - 1)) {
+                answer++;
+            } else if (reserveSet.remove(l + 1)) {
+                answer++;
+            }
+        }
+
+        return answer;
+    }
+}
